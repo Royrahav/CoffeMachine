@@ -12,10 +12,10 @@ def calculate_price(money_map):
 
 def process_coins():
     money_map = {
-        "quarters": [int(input("How many quarters?")), 0.25],
-        "dimes": [int(input("How many dimes?")), 0.1],
-        "nickles": [int(input("How many nickles?")), 0.05],
-        "pennies": [int(input("How many pennies?")), 0.01]
+        "quarters": [int(input("How many quarters ($0.25)? ")), 0.25],
+        "dimes": [int(input("How many dimes ($0.1)? ")), 0.1],
+        "nickles": [int(input("How many nickles? ($0.05)")), 0.05],
+        "pennies": [int(input("How many pennies? ($0.01)")), 0.01]
     }
     amount = calculate_price(money_map)
     # debug:
@@ -52,11 +52,12 @@ def turn_off():
 
 def calculate_change_and_price(drink):
     global money_amount
+    cost = mr.MENU[drink]["cost"]
+    print(f"{drink} costs &{cost}. How would you like to pay?")
     inserted_coins_value = process_coins()
     # debug:
     # print(f"inserted_coins_value: {inserted_coins_value}")
     change = 0
-    cost = mr.MENU[drink]["cost"]
     # debug:
     # print(f"cost is: {cost}")
     if inserted_coins_value < cost:
