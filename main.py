@@ -18,8 +18,6 @@ def process_coins():
         "pennies": [int(input("How many pennies? ($0.01)")), 0.01]
     }
     amount = calculate_price(money_map)
-    # debug:
-    # print(f"amount is: {amount}")
     return amount
 
 
@@ -55,11 +53,7 @@ def calculate_change_and_price(drink):
     cost = mr.MENU[drink]["cost"]
     print(f"{drink} costs &{cost}. How would you like to pay?")
     inserted_coins_value = process_coins()
-    # debug:
-    # print(f"inserted_coins_value: {inserted_coins_value}")
     change = 0
-    # debug:
-    # print(f"cost is: {cost}")
     if inserted_coins_value < cost:
         print("Sorry that's not enough money. Money refunded.")
         return False
