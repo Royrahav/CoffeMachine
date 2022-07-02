@@ -68,18 +68,15 @@ def create_drink(choice):
 def machine_on():
     """ Main machine operation func. """
     choice = input(f"What would you like? ({menu.get_items()}): ").lower()
-    if is_drink(choice):
-        drink = create_drink(choice)
-        if validate_drink(drink):
-            coffee_maker.make_coffee(drink)
-
+    if choice == "off":
+        return turn_off()
+    elif choice == "report":
+        return report()
     else:
-        if choice == "off":
-            return turn_off()
-        elif choice == "report":
-            return report()
-        else:
-            pass
+        drink = menu.find_drink(choice)
+        if drink is not None:
+            if validate_drink(drink):
+                coffee_maker.make_coffee(drink)
     return True
 
 
