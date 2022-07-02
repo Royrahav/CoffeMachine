@@ -3,7 +3,6 @@ from coffee_maker import CoffeeMaker
 from money_machine import MoneyMachine
 import menu_and_resources as mr
 
-money_amount = 0
 coffee_maker = CoffeeMaker()
 money_machine = MoneyMachine()
 menu = Menu()
@@ -27,7 +26,6 @@ def calculate_change_and_price(drink):
     Checks if entered coins are sufficient, returns False if not.
     Also, it calculates the change
     """
-    global money_amount
     cost = mr.MENU[drink.name]["cost"]
     print(f"{drink.name} costs ${cost}. How would you like to pay?")
     return money_machine.make_payment(cost)
@@ -48,21 +46,6 @@ def validate_drink(drink):
 def is_drink(drink):
     """ Checks if the entered value is a drink, returns True, or another command, returns False. """
     return menu.find_drink(drink) is not None
-
-
-def create_drink(choice):
-    ingredients = mr.MENU[choice]["ingredients"]
-    water = milk = coffee = cost = 0
-    if "water" in ingredients:
-        water = ingredients["water"]
-    if "milk" in ingredients:
-        milk = ingredients["milk"]
-    if "coffee" in ingredients:
-        coffee = ingredients["coffee"]
-    if "cost" in ingredients:
-        cost = ingredients["cost"]
-
-    return MenuItem(choice, water, milk, coffee, cost)
 
 
 def machine_on():
