@@ -50,21 +50,26 @@ def is_drink(drink):
     return menu.find_drink(drink) is not None
 
 
+def create_drink(choice):
+    ingredients = mr.MENU[choice]["ingredients"]
+    water = milk = coffee = cost = 0
+    if "water" in ingredients:
+        water = ingredients["water"]
+    if "milk" in ingredients:
+        milk = ingredients["milk"]
+    if "coffee" in ingredients:
+        coffee = ingredients["coffee"]
+    if "cost" in ingredients:
+        cost = ingredients["cost"]
+
+    return MenuItem(choice, water, milk, coffee, cost)
+
+
 def machine_on():
     """ Main machine operation func. """
     choice = input(f"What would you like? ({menu.get_items()}): ").lower()
     if is_drink(choice):
-        ingredients = mr.MENU[choice]["ingredients"]
-        water = milk = coffee = cost = 0
-        if "water" in ingredients:
-            water = ingredients["water"]
-        if "milk" in ingredients:
-            milk = ingredients["milk"]
-        if "coffee" in ingredients:
-            coffee = ingredients["coffee"]
-        if "cost" in ingredients:
-            cost = ingredients["cost"]
-        drink = MenuItem(choice, water, milk, coffee, cost)
+        drink = create_drink(choice)
         if validate_drink(drink):
             coffee_maker.make_coffee(drink)
 
